@@ -781,10 +781,6 @@ section,
 }
 
 @media screen and (min-width: 1100px) {
-    .aboutus_card{
-        height: 100vh;
-    }
-
     .card__container{
         grid-template-columns: repeat(3,328px);
     }
