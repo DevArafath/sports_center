@@ -661,6 +661,7 @@ section,
 .card__description{
     font-size: 12px;
     color: var(--background-color);
+    padding: 5px 7px;
 }
 
 .card__shapes{
@@ -786,6 +787,116 @@ section,
     }
 }
 
+/* Brand Slider Scroll Styles */
+.brand_container{
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    padding: 40px 0;
+}
 
+.brand_container .brand_slider{
+    display: flex;
+    width: calc(180px * 10); /* Width of each logo * number of logos */
+    animation: scroll 30s linear infinite;
+}
+
+.brand_container .brand_slider:hover{
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-180px * 5)); /* Half the total width */
+    }
+}
+
+.brand_container .logo{
+    width: 180px;
+    height: 100px;
+    padding: 20px;
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.brand_container .logo:hover {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* .logo img {
+    max-width: 100%;
+    max-height: 100%;
+} */
+
+/* Gradient fade effect on both sides */
+.brand_container::before,
+.brand_container::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    pointer-events: none;
+}
+
+.brand_container::before {
+    left: 0;
+    background: linear-gradient(to right, #ececec, transparent);
+}
+
+.brand_container::after {
+    right: 0;
+    background: linear-gradient(to left, #ececec, transparent);
+}
+
+/* Elastic scroll effect */
+@keyframes scroll {
+    0%  { transform: translateX(0); }
+    10% { transform: translateX(calc(-180px * 0.5)); }
+    20% { transform: translateX(calc(-180px * 1)); }
+    30% { transform: translateX(calc(-180px * 1.5)); }
+    40% { transform: translateX(calc(-180px * 2)); }
+    50% { transform: translateX(calc(-180px * 2.5)); }
+    60% { transform: translateX(calc(-180px * 3)); }
+    70% { transform: translateX(calc(-180px * 3.5)); }
+    80% { transform: translateX(calc(-180px * 4)); }
+    90% { transform: translateX(calc(-180px * 4.5)); }
+    100% { transform: translateX(calc(-180px * 5)); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo {
+        width: 140px;
+        padding: 15px;
+    }
+    
+    .brand_container::before,
+    .brand_container::after {
+        width: 100px;
+    }
+    }
+    
+    @media (max-width: 480px) {
+    .logo {
+        width: 120px;
+        padding: 10px;
+    }
+    
+    .brand_container::before,
+    .brand_container::after {
+        width: 60px;
+    }
+}
 
 
