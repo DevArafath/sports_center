@@ -899,5 +899,160 @@ section,
     }
 }
 
+/*--------------------------------------------------------------
+# Product Section 
+--------------------------------------------------------------*/
+.featured_container {
+    padding: 2rem 0;
+}
 
+.featured_cards {
+    display: grid;
+    /* Updated grid for better mobile responsiveness */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+}
 
+/* Mobile view - 1 card per row */
+@media (max-width: 767px) {
+    .featured_cards {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+/* Tablet view - 2 cards per row */
+@media (min-width: 768px) and (max-width: 991px) {
+    .featured_cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Smaller desktop - 3 cards per row */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .featured_cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Larger desktop - 4 cards per row */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .featured_cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.featured_card {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../img/snooker_table_texture.jpg');
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card_img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    z-index: 2;
+    transition: transform 0.4s ease;
+    margin-bottom: 2rem;
+}
+
+.card_data {
+    text-align: center;
+    color: white;
+    z-index: 2;
+    transition: transform 0.4s ease, opacity 0.3s ease;
+    padding: 1rem;
+}
+
+.card_title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--background-color);
+}
+
+.card_details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.card_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.card_button {
+    position: absolute;
+    bottom: -50px;
+    background-color: white;
+    color: #0D5C2F;
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    z-index: 2;
+    transition: bottom 0.4s ease, transform 0.3s ease;
+}
+
+/* Hover Effects */
+.featured_card:hover {
+    transform: translateY(-5px);
+}
+
+.featured_card:hover .card_img {
+    transform: scale(1.1);
+}
+
+.featured_card:hover .card_data {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+.featured_card:hover .card_bg {
+    opacity: 0.85;
+}
+
+.featured_card:hover .card_button {
+    bottom: 40px;
+}
+
+.card_button:hover {
+    transform: translateY(-3px);
+}
+
+/* Touch device support for hover effects */
+@media (hover: none) {
+    .featured_card:active .card_img {
+        transform: scale(1.1);
+    }
+    
+    .featured_card:active .card_data {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    
+    .featured_card:active .card_bg {
+        opacity: 0.85;
+    }
+    
+    .featured_card:active .card_button {
+        bottom: 40px;
+    }
+}
