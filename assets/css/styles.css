@@ -42,7 +42,7 @@
 }
 
 /*--------------------------------------------------------------
-#  General Styling & Shared Classes
+#  General Styling & Shared Classes ##########################|
 --------------------------------------------------------------*/
 *{
     margin: 0;
@@ -73,7 +73,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /*--------------------------------------------------------------
-# Cursor Styles
+# Cursor Styles #############
 --------------------------------------------------------------*/
 .cursor-dot {
     width: 8px;
@@ -99,7 +99,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /*--------------------------------------------------------------
-# Global Header
+# Global Header ###############################################|
 --------------------------------------------------------------*/
 .header{
     --background-color: rgba(0, 0, 0, 0);
@@ -132,9 +132,9 @@ h1,h2,h3,h4,h5,h6{
 }
 
 /*--------------------------------------------------------------
-# Navigation Menu
+# Navigation Menu #############################################|
 --------------------------------------------------------------*/
-/* Desktop Navbar ############################################*/
+/* Desktop Navbar Styles*/
 @media (min-width: 1200px) {
     .navbar{
         padding: 0;
@@ -443,7 +443,7 @@ section,
     }
 }
 /*--------------------------------------------------------------
-# Global Section Titles
+# Global Section Titles #######################################|
 --------------------------------------------------------------*/
 .section-title {
     text-align: center;
@@ -455,23 +455,38 @@ section,
     font-size: 32px;
     font-weight: 700;
     position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 
-.section-title h2:before,
+/* Left side - Cue handle (thicker) */
+.section-title h2:before {
+    content: "";
+    width: 70px;
+    height: 7px; /* Thicker handle */
+    margin: 0 15px 0 0;
+    background: linear-gradient(to right, 
+        #e28441 0%, #e28441 10%, /* Brown first 10% */
+        #000000 10%, #000000 100%
+    );
+    display: inline-block;
+    border-radius: 3px 0 0 3px;
+    transform: translateY(1px); /* Align vertically with text */
+}
+
+/* Right side - Cue shaft and Tip (thinner) */
 .section-title h2:after {
     content: "";
-    width: 50px;
-    height: 2px;
-    background: var(--accent-color);
+    width: 70px;
+    height: 4px; /* Thinner shaft */
+    margin: 0 0 0 15px;
+    background: linear-gradient(to right, 
+        #e28441 95%, /* Brown shaft */
+        #FFFFFF 95% /* White cue tip */
+    );
     display: inline-block;
-}
-
-.section-title h2:before {
-    margin: 0 15px 10px 0;
-}
-
-.section-title h2:after {
-    margin: 0 0 10px 15px;
+    border-radius: 0 2px 2px 0;
+    transform: translateY(1px); /* Align vertically with text */
 }
 
 .section-title p {
@@ -851,12 +866,12 @@ section,
 
 .brand_container::before {
     left: 0;
-    background: linear-gradient(to right, #ececec, transparent);
+    background: linear-gradient(to right, var(--background-color), transparent);
 }
 
 .brand_container::after {
     right: 0;
-    background: linear-gradient(to left, #ececec, transparent);
+    background: linear-gradient(to left, var(--background-color), transparent);
 }
 
 /* Responsive adjustments */
@@ -883,5 +898,6 @@ section,
         width: 60px;
     }
 }
+
 
 
