@@ -164,38 +164,52 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log("Ball hit sound ready state:", ballHitSound.readyState);
   });
 
-
-  // Function to add the 'active' class to the current section's nav link
+  //_______________________________________________________________________
+  // UPDATED: Set active link based on current page and section           |
+  //----------------------------------------------------------------------
   function setActiveLink() {
-    const sections = document.querySelectorAll('section'); // Select all sections
-    const navLinks = document.querySelectorAll('.navmenu a'); // Select all nav links
-    let currentSection = '';
-
-    // Loop through sections and find the one currently in view
-    sections.forEach(section => {
+    const navLinks = document.querySelectorAll('#navmenu a');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // First, remove active class from all links
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+    
+    // For section-based navigation within a page
+    if (currentPage === 'index.html' || currentPage === '') {
+      const sections = document.querySelectorAll('section');
+      let currentSection = '';
+      
+      // Find the current section in view
+      sections.forEach(section => {
         const sectionTop = section.offsetTop - 100; // Adjust for navbar height
         const sectionBottom = sectionTop + section.offsetHeight;
-
+        
         if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-            currentSection = section.id; // Get the ID of the current section
+          currentSection = section.id;
         }
-    });
-
-    // Loop through nav links and set the 'active' class
-    navLinks.forEach(link => {
-        link.classList.remove('active'); // Remove active class from all links
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active'); // Add active class to the current link
+      });
+      
+      // Set active class for the current section
+      if (currentSection) {
+        const activeLink = document.querySelector(`#navmenu a[href="index.html#${currentSection}"], #navmenu a[href="#${currentSection}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
         }
-    });
+      }
+    } else {
+      // For separate pages (products.html, projects.html)
+      const activeLink = document.querySelector(`#navmenu a[href="${currentPage}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
   }
 
-  // Add event listener to handle scroll
+  // Add event listener for scroll to update active link
   window.addEventListener('scroll', setActiveLink);
-
-  // Add event listener for page load
+  
+  // Add event listener for page load to set initial active link
   window.addEventListener('load', setActiveLink);
-
-
-
 });
