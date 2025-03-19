@@ -373,17 +373,6 @@ h1,h2,h3,h4,h5,h6{
         background-color: rgba(33, 37, 41, 0.03);
     }
 
-    /* For the dropdown toggle button that JS will add */
-    .dropdown-toggle {
-        position: absolute;
-        right: 20px;
-        top: 10px;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-        z-index: 10;
-    }
-
     .mobile-nav-active {
         overflow: hidden;
     }
