@@ -438,6 +438,7 @@ section,
     text-align: center;
     padding-bottom: 60px;
     position: relative;
+    max-width: 950px;
 }
 
 .section-title h2 {
@@ -480,6 +481,8 @@ section,
 
 .section-title p {
     margin-bottom: 0;
+    text-align: justify;
+    text-align-last: center;
 }
 
 /*--------------------------------------------------------------
@@ -682,7 +685,7 @@ section,
     display: block;
     width: 260px;
     height: 40px;
-    background: linear-gradient(90deg, hsl(300, 76%, 60%), hsl(57, 81%, 60%));
+    background: linear-gradient(90deg, hsl(197.5, 44.44%, 10.59%), hsl(195.43, 35.35%, 19.41%), hsl(198.21, 38.89%, 28.24%));
     border-radius: 4rem;
     transform: rotate(-24deg);
     opacity: 0;
