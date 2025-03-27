@@ -149,8 +149,10 @@
                     return;
                 }
 
-                const itemNames = wishlist.map(item => item.name).join('\n');
-                const message = `I'm interested in these products:\n\n${itemNames}\n\nI want to know the price and more details about these products.`;
+                // Create a numbered list of wishlist items
+                const itemsList = wishlist.map((item, index) => `${index + 1}. ${item.name}`).join('\n');
+                
+                const message = `Wishlist Products:\n\n${itemsList}\n\nPlease, I want to know more details about the above products.`;
                 
                 const whatsappUrl = `https://wa.me/94756498049?text=${encodeURIComponent(message)}`;
                 window.open(whatsappUrl, '_blank');
