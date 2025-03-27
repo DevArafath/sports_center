@@ -177,6 +177,17 @@
     <div class="container">
         <h1 class="mb-4">Products Catalog</h1>
         
+        <!-- Wishlist Cart Icon -->
+        <div class="wishlist-cart-icon position-fixed top-0 end-0 m-3">
+            <a href="wishlist.html" class="btn btn-outline-secondary position-relative">
+                <i class="fas fa-heart"></i>
+                <span id="wishlistCounter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+                    0
+                    <span class="visually-hidden">items in wishlist</span>
+                </span>
+            </a>
+        </div>
+
         <div class="row">
             <!-- Left sidebar with multilevel filter buttons -->
             <div class="col-lg-3 col-md-4">
@@ -667,6 +678,20 @@
             });
 
             // Wishlist Functionality###################################################################################
+            // Function to update wishlist counter
+            function updateWishlistCounter() {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                const counter = $('#wishlistCounter');
+                
+                if (wishlist.length > 0) {
+                    counter.text(wishlist.length);
+                    counter.show();
+                } else {
+                    counter.hide();
+                }
+            }
+
+            // Wishlist Functionality
             $('.wishlist-btn').on('click', function() {
                 const card = $(this).closest('.card');
                 const productItem = $(this).closest('.product-item');
@@ -698,9 +723,12 @@
                     $(this).addClass('btn-secondary').removeClass('btn-danger');
                     $(this).html('<i class="fas fa-heart"></i> Wishlist');
                 }
+                
+                // Update counter
+                updateWishlistCounter();
             });
 
-            // On page load, update wishlist button states
+            // On page load, update wishlist button states and counter
             $(document).ready(function() {
                 const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
                 
@@ -718,6 +746,9 @@
                         wishlistBtn.html('<i class="fas fa-heart"></i> Wishlist');
                     }
                 });
+                
+                // Initialize counter
+                updateWishlistCounter();
             });
         
         });
