@@ -151,6 +151,16 @@
         .toggle-icon.rotated {
             transform: rotate(180deg);
         }
+
+        .wishlist-btn {
+            background-color: #6c757d;
+            color: white;
+            margin-right: 5px;
+        }
+        .wishlist-btn:hover {
+            background-color: #495057;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -258,7 +268,9 @@
                                 <p class="card-text price">$1,299.99</p>
                             </div>
                             <div class="card-footer d-flex">
-                                <a href="cart.html" class="btn btn-danger btn-sm ms-auto">Add To Cart</a>
+                                <button class="btn btn-secondary btn-sm wishlist-btn me-2">
+                                    <i class="fas fa-heart"></i> Wishlist
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -615,6 +627,34 @@
                 e.preventDefault();
                 // This would normally implement the functionality to limit items shown
             });
+
+            // Wishlist Functionality
+            $('.wishlist-btn').on('click', function() {
+                const card = $(this).closest('.card');
+                const item = {
+                    name: card.find('.card-title').text(),
+                    price: card.find('.price').text(),
+                    image: card.find('.card-img-top').attr('src'),
+                    category: $(this).closest('.product-item').attr('class')
+                };
+
+                // Get existing wishlist or create new
+                let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                
+                // Check if item already exists
+                const exists = wishlist.some(wishlistItem => 
+                    wishlistItem.name === item.name
+                );
+
+                if (!exists) {
+                    wishlist.push(item);
+                    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                    alert(`${item.name} added to wishlist!`);
+                } else {
+                    alert('This item is already in your wishlist!');
+                }
+            });
+        
         });
     </script>
 </body>

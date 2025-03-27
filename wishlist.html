@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - Crown Billiards International</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.png">   
+
+    <!-- Fonts CSS -->
+    <link rel="stylesheet" href="./assets/css/fonts.css">
+
+    <!-- Services & Vendor CSS -->
+    <link rel="stylesheet" href="./assets/services/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/services/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/services/fontawesome/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+
+    <style>
+        .wishlist-item {
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .wishlist-item img {
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .whatsapp-share {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .whatsapp-share:hover {
+            background-color: #128C7E;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">My Wishlist</h1>
+                
+                <div class="d-flex justify-content-end mb-3">
+                    <button id="resetWishlist" class="btn btn-danger me-2">
+                        <i class="fas fa-trash-alt"></i> Reset Wishlist
+                    </button>
+                    <button id="whatsappShare" class="btn whatsapp-share">
+                        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                    </button>
+                </div>
+
+                <div id="emptyWishlistMessage" class="empty-wishlist" style="display: none;">
+                    <h3>Your wishlist is empty</h3>
+                    <p>Add some products to get started!</p>
+                    <a href="products.html" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> Browse Products
+                    </a>
+                </div>
+
+                <div id="wishlistContainer" class="row">
+                    <!-- Wishlist items will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services & Vendor JS -->
+    <script src="./assets/services/jQuery_v3.7.1/jquery-3.7.1.min.js"></script>
+    <script src="./assets/services/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const wishlistContainer = $('#wishlistContainer');
+            const emptyWishlistMessage = $('#emptyWishlistMessage');
+            const resetButton = $('#resetWishlist');
+            const whatsappShareButton = $('#whatsappShare');
+
+            // Load wishlist from localStorage
+            function loadWishlist() {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                
+                wishlistContainer.empty();
+                
+                if (wishlist.length === 0) {
+                    emptyWishlistMessage.show();
+                    wishlistContainer.hide();
+                } else {
+                    emptyWishlistMessage.hide();
+                    wishlistContainer.show();
+                    
+                    wishlist.forEach((item, index) => {
+                        const wishlistItemHTML = `
+                            <div class="col-md-4 col-sm-6 wishlist-item">
+                                <div class="card">
+                                    <img src="${item.image}" class="card-img-top" alt="${item.name}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${item.name}</h5>
+                                        <p class="card-text price">${item.price}</p>
+                                        <button class="btn btn-danger btn-sm remove-item" data-index="${index}">
+                                            <i class="fas fa-trash-alt"></i> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        wishlistContainer.append(wishlistItemHTML);
+                    });
+
+                    // Add remove item functionality
+                    $('.remove-item').on('click', function() {
+                        const index = $(this).data('index');
+                        const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                        wishlist.splice(index, 1);
+                        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+                        loadWishlist();
+                    });
+                }
+            }
+
+            // Reset wishlist
+            resetButton.on('click', function() {
+                localStorage.removeItem('wishlist');
+                loadWishlist();
+            });
+
+            // WhatsApp share functionality
+            whatsappShareButton.on('click', function() {
+                const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+                
+                if (wishlist.length === 0) {
+                    alert('Your wishlist is empty!');
+                    return;
+                }
+
+                const itemNames = wishlist.map(item => item.name).join('\n');
+                const message = `I'm interested in these products:\n\n${itemNames}\n\nI want to know the price and more details about these products.`;
+                
+                const whatsappUrl = `https://wa.me/94756498049?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+
+            // Initial load
+            loadWishlist();
+        });
+    </script>
+</body>
+</html>
