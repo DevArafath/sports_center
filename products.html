@@ -175,10 +175,17 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Products Catalog</h1>
         
-        <!-- Wishlist Cart Icon -->
-        <div class="wishlist-cart-icon position-fixed top-0 end-0 m-3">
+        <h1 class="mb-4 float-start">Products Catalog</h1>
+        
+        <!-- Navigation Icons -->
+        <div class="navigation-icons float-end">
+            <!-- Products Icon -->
+            <a href="index.html" class="btn btn-outline-secondary position-relative me-1">
+                <i class="fa-solid fa-home"></i>
+            </a>
+            
+            <!-- Wishlist Icon -->
             <a href="wishlist.html" class="btn btn-outline-secondary position-relative">
                 <i class="fas fa-heart"></i>
                 <span id="wishlistCounter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
@@ -187,6 +194,7 @@
                 </span>
             </a>
         </div>
+        <div class="clearfix"></div>
 
         <div class="row">
             <!-- Left sidebar with multilevel filter buttons -->
