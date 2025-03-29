@@ -690,12 +690,17 @@
             function updateWishlistCounter() {
                 const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
                 const counter = $('#wishlistCounter');
+                const wishlistIcon = $('a[href="wishlist.html"] i.fas.fa-heart');
                 
                 if (wishlist.length > 0) {
                     counter.text(wishlist.length);
                     counter.show();
+                    // Add text-danger class to make the heart icon red
+                    wishlistIcon.addClass('text-danger');
                 } else {
                     counter.hide();
+                    // Remove text-danger class when wishlist is empty
+                    wishlistIcon.removeClass('text-danger');
                 }
             }
 

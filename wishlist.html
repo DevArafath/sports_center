@@ -58,12 +58,15 @@
                 <h1 class="mb-4">My Wishlist</h1>
                 
                 <div class="d-flex justify-content-end mb-3">
-                    <button id="resetWishlist" class="btn btn-danger me-2">
+                    <a href="products.html" class="btn btn-warning me-2">
+                        <i class="fa-solid fa-cart-shopping"></i> Products
+                    </a>
+                    <button id="whatsappShare" class="btn whatsapp-share me-2">
+                        <i class="fab fa-whatsapp"></i> Inquire on WhatsApp
+                    </button>
+                    <button id="resetWishlist" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i> Reset Wishlist
-                    </button>
-                    <button id="whatsappShare" class="btn whatsapp-share">
-                        <i class="fab fa-whatsapp"></i> Share on WhatsApp
-                    </button>
+                    </button>                    
                 </div>
 
                 <div id="emptyWishlistMessage" class="empty-wishlist" style="display: none;">
@@ -107,7 +110,7 @@
                     
                     wishlist.forEach((item, index) => {
                         const wishlistItemHTML = `
-                            <div class="col-md-4 col-sm-6 wishlist-item">
+                            <div class="col-md-3 col-sm-6 wishlist-item">
                                 <div class="card">
                                     <img src="${item.image}" class="card-img-top" alt="${item.name}">
                                     <div class="card-body">
